@@ -5,25 +5,31 @@ import {
     ChangeDetectorRef,
     ViewEncapsulation,
 } from '@angular/core';
-
-import { startOfYear, subYears } from 'date-fns';
-import { HolidayService } from '../demo-utils/holiday/holiday.service';
-import { CalendarEventWithMeta } from '../demo-utils/calendar-event-with-meta.type';
-
-
 import {
+    CalendarDateFormatter,
     CalendarMonthViewBeforeRenderEvent,
     CalendarWeekViewBeforeRenderEvent,
     CalendarDayViewBeforeRenderEvent,
     CalendarView,
+    DAYS_OF_WEEK,
 } from 'angular-calendar';
 
 
+import { CustomDateFormatter } from '../demo-utils/custom-date-formatter.provider';
+import { HolidayService } from '../demo-utils/holiday/holiday.service';
+import { CalendarEventWithMeta } from '../demo-utils/calendar-event-with-meta.type';
+
 @Component({
-    selector: 'demo-with-holday-component',
+    selector: 'demo-component',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     templateUrl: 'template.html',
+    providers: [
+        {
+            provide: CalendarDateFormatter,
+            useClass: CustomDateFormatter,
+        },
+    ],
     styles: [
         `
         .cal-month-view .bg-pink,
@@ -34,18 +40,23 @@ import {
       `,
     ],
 })
+export class DemoHebrewWithHolidayComponent implements OnInit {
+    constructor(private holidayService: HolidayService,
+        private cdr: ChangeDetectorRef) { }
 
-
-export class DemoCalendarWithHolidayComponent implements OnInit {
     view: CalendarView = CalendarView.Month;
 
-    viewDate = startOfYear(subYears(new Date(), 1));
+    viewDate = new Date();
 
     events: CalendarEventWithMeta[] = [];
 
+    locale: string = 'he';
 
-    constructor(private holidayService: HolidayService,
-        private cdr: ChangeDetectorRef) { }
+    weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
+
+    weekendDays: number[] = [DAYS_OF_WEEK.FRIDAY, DAYS_OF_WEEK.SATURDAY];
+
+    CalendarView = CalendarView;
 
     ngOnInit(): void {
         this.fetchHolidays();
@@ -68,6 +79,10 @@ export class DemoCalendarWithHolidayComponent implements OnInit {
                 console.log(this.events);
                 this.cdr.markForCheck();
             });
+    }
+
+    setView(view: CalendarView) {
+        this.view = view;
     }
 
     getHolidayTitle(dayOfMonth: number, date: Date) {
@@ -124,3 +139,4 @@ export class DemoCalendarWithHolidayComponent implements OnInit {
         });
     }
 }
+

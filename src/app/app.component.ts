@@ -20,4 +20,8 @@ export class AppComponent {
   goCalendarWithHolidayDemo() {
     this.router.navigate(['calendarWithHolidayDemo']);
   }
+
+  goHebrewCalendarWithHolidayDemo() {
+    this.router.navigate(['hebrewCalendarWithHolidayDemo']);
+  }
 }

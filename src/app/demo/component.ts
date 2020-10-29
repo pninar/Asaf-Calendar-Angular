@@ -5,7 +5,7 @@ import {
     CalendarView,
     DAYS_OF_WEEK,
 } from 'angular-calendar';
-import { CustomDateFormatter } from './custom-date-formatter.provider';
+import { CustomDateFormatter } from '../demo-utils/custom-date-formatter.provider';
 
 @Component({
     selector: 'demo-component',

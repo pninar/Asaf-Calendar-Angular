@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { DemoCalendarModule } from './demo/module';
 import { DemoCalendarWithHolidayModule } from './demo-with-holiday/module';
+import { DemoHebrewWithHolidayCalendarModule } from './demo-hebrew-with-holiday/module';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 @NgModule({
@@ -19,7 +20,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     AppRoutingModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
     DemoCalendarModule,
-    DemoCalendarWithHolidayModule
+    DemoCalendarWithHolidayModule,
+    DemoHebrewWithHolidayCalendarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
