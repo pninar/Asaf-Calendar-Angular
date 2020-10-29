@@ -1,0 +1,37 @@
+<mwl-demo-utils-calendar-header [(view)]="view" [(viewDate)]="viewDate">
+</mwl-demo-utils-calendar-header>
+
+<ng-template #customCellTemplate let-day="day" let-locale="locale">
+    <div class="cal-cell-top">
+        <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
+        <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+    </div>
+    <div class="cal-events" *ngIf="day.events.length > 0">
+        <div class="cal-event" *ngFor="let event of day.events; trackBy:trackByEventId"
+            [style.backgroundColor]="event.color?.primary" [ngClass]="event?.cssClass"
+            (mouseenter)="highlightDay.emit({event: event})" (mouseleave)="unhighlightDay.emit({event: event})"
+            [mwlCalendarTooltip]="event.title | calendarEventTitle:'monthTooltip':event"
+            [tooltipPlacement]="tooltipPlacement" [tooltipEvent]="event" [tooltipTemplate]="tooltipTemplate"
+            [tooltipAppendToBody]="tooltipAppendToBody" mwlDraggable [class.cal-draggable]="event.draggable"
+            dragActiveClass="cal-drag-active" [dropData]="{event: event, draggedFrom: day}"
+            [dragAxis]="{x: event.draggable, y: event.draggable}" (mwlClick)="eventClicked.emit({ event: event })">
+        </div>
+    </div>
+    <small style="margin: 5px;">
+        {{getHolidayTitle(day.date | calendarDate:'monthViewDayNumber':locale, day.date )}}
+    </small>
+</ng-template>
+
+
+
+<div [ngSwitch]="view">
+    <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events"
+        (beforeViewRender)="beforeMonthViewRender($event)" [cellTemplate]="customCellTemplate">
+    </mwl-calendar-month-view>
+    <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events"
+        (beforeViewRender)="beforeWeekViewRender($event)">
+    </mwl-calendar-week-view>
+    <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events"
+        (beforeViewRender)="beforeDayViewRender($event)">
+    </mwl-calendar-day-view>
+</div>
