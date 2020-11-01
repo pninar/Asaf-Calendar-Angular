@@ -1,4 +1,7 @@
 export enum EventTypes {
     Normal = "normal",
-    Holiday = "holiday"
+    Holiday = "holiday",
+    Warning = "warning",
+    Danger = "danger",
+    Info = "info"
 };
