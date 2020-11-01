@@ -1,4 +1,24 @@
+<div class="row">
+    <div class="col-md-3">
+        <div class="card" mwlDroppable (drop)="externalDrop($event.dropData.event)" dragOverClass="drag-over">
+            <div class="card-body">
+                <p *ngIf="externalEvents.length === 0"><em>No events added</em></p>
+                <p *ngIf="externalEvents.length > 0"><em>Events to add - drag to add to calendar</em></p>
+                <ul>
+                    <li *ngFor="let event of externalEvents" mwlDraggable [dropData]="{event: event}"
+                        [touchStartLongPress]="{ delay: 300, delta: 30 }" dragActiveClass="drag-active">
+                        <a href="javascript:;" [style.color]="event.color.primary">
+                            {{ event.title }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row text-center">
+
     <div class="col-md-4">
         <div class="btn-group">
             <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
@@ -37,11 +57,22 @@
 </div>
 <br />
 
-<ng-template #customCellTemplate let-day="day" let-locale="locale">
+<!-- <ng-template #customCellTemplate let-day="day" let-locale="locale">
     <div class="cal-cell-top">
         <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
         <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
     </div>
+    <small style="margin: 5px;">{{getHolidayTitle(day.date )}}</small>
+</ng-template> -->
+
+<ng-template #customCellTemplate let-day="day" let-openDay="openDay" let-locale="locale"
+    let-tooltipPlacement="tooltipPlacement" let-highlightDay="highlightDay" let-unhighlightDay="unhighlightDay"
+    let-eventClicked="eventClicked" let-tooltipTemplate="tooltipTemplate" let-tooltipAppendToBody="tooltipAppendToBody">
+    <div class="cal-cell-top">
+        <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
+        <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+    </div>
+    <small style="margin: 5px;">{{getHolidayTitle(day.date )}}</small>
     <div class="cal-events" *ngIf="day.events.length > 0">
         <div class="cal-event" *ngFor="let event of day.events; trackBy:trackByEventId"
             [style.backgroundColor]="event.color?.primary" [ngClass]="event?.cssClass"
@@ -53,10 +84,9 @@
             [dragAxis]="{x: event.draggable, y: event.draggable}" (mwlClick)="eventClicked.emit({ event: event })">
         </div>
     </div>
-    <small style="margin: 5px;">
-        {{getHolidayTitle(day.date | calendarDate:'monthViewDayNumber':locale, day.date )}}
-    </small>
 </ng-template>
+
+
 
 <div [ngSwitch]="view">
     <!-- <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [locale]="locale"
@@ -64,11 +94,13 @@
     </mwl-calendar-month-view> -->
     <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [locale]="locale"
         [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays" (beforeViewRender)="beforeMonthViewRender($event)"
-        [cellTemplate]="customCellTemplate">
+        [cellTemplate]="customCellTemplate" (eventClicked)="eventClicked($event)" (dayClicked)="dayClicked($event.day)"
+        [refresh]="refresh" (eventTimesChanged)="eventTimesChanged($event)">
     </mwl-calendar-month-view>
     <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [locale]="locale"
-        [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays">
+        [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays" (eventClicked)="eventClicked($event)">
     </mwl-calendar-week-view>
-    <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [locale]="locale">
+    <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [locale]="locale"
+        (eventClicked)="eventClicked($event)">
     </mwl-calendar-day-view>
 </div>

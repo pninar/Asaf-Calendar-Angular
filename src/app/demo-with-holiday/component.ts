@@ -17,12 +17,13 @@ import {
     CalendarDayViewBeforeRenderEvent,
     CalendarView,
 } from 'angular-calendar';
+import { EventTypes } from '../demo-utils/event-types';
 
 
 @Component({
     selector: 'demo-with-holday-component',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
+    encapsulation: ViewEncapsulation.None, // hack to get the styles to apply locally
     templateUrl: 'template.html',
     styles: [
         `
@@ -60,8 +61,8 @@ export class DemoCalendarWithHolidayComponent implements OnInit {
                         title: holiday.name,
                         allDay: true,
                         meta: {
-                            type: 'holiday',
-                            holiday,
+                            id: 1,
+                            type: EventTypes.Holiday,
                         },
                     };
                 });

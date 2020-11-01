@@ -1,3 +1,5 @@
+// primary color is used for the circle on the calendar
+// secondary color is used for the background of the day when the circle is hovered over
 export const colors: any = {
     red: {
         primary: '#ad2121',
@@ -10,5 +12,13 @@ export const colors: any = {
     yellow: {
         primary: '#e3bc08',
         secondary: '#FDF1BA',
+    },
+    purple: {
+        primary: '#4C0B5F',
+        secondary: '#E2A9F3',
+    },
+    green: {
+        primary: '#0B610B',
+        secondary: '#BCF5A9',
     },
 };
