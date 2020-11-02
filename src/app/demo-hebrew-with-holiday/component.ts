@@ -271,6 +271,10 @@ export class DemoHebrewWithHolidayComponent implements OnInit {
     }
 
 
+    headerDateClick(day: CalendarMonthViewDay) {
+        console.log('headerDateClick: ' + day.date);
+    }
+
     getHolidayTitle(date: Date) {
         // console.log(date);
         let holiday = this.holidays.find(event =>
