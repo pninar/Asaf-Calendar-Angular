@@ -75,9 +75,12 @@ export class DemoHebrewWithHolidayComponent implements OnInit {
 
     locale: string = 'he';
 
-    weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
+    weekStartsOn: number = DAYS_OF_WEEK.SUNDAY;
 
     weekendDays: number[] = [DAYS_OF_WEEK.FRIDAY, DAYS_OF_WEEK.SATURDAY];
+
+    // exclude weekends
+    excludeDays: number[] = [DAYS_OF_WEEK.FRIDAY, DAYS_OF_WEEK.SATURDAY];
 
     CalendarView = CalendarView;
 
@@ -86,7 +89,7 @@ export class DemoHebrewWithHolidayComponent implements OnInit {
     refresh: Subject<any> = new Subject();
 
     ngOnInit(): void {
-        this.gethHolidays();
+        // this.gethHolidays();
         this.getExternalEvents();
         this.getEvents();
         this.groupSimilarEvents();
@@ -282,6 +285,13 @@ export class DemoHebrewWithHolidayComponent implements OnInit {
 
     }
 
+    handleWeekendsToggle() {
+        if (this.excludeDays.length == 0)
+            this.excludeDays = [DAYS_OF_WEEK.FRIDAY, DAYS_OF_WEEK.SATURDAY];
+        else
+            this.excludeDays = [];
+    }
+
     externalDrop(event: CalendarEvent) {
         if (this.externalEvents.indexOf(event) === -1) {
             this.events = this.events.filter((iEvent) => iEvent !== event);
@@ -313,6 +323,7 @@ export class DemoHebrewWithHolidayComponent implements OnInit {
         }
         this.events = [...this.events];
     }
+
 
     // eventTimesChanged({
     //     event,
