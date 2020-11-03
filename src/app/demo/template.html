@@ -120,6 +120,9 @@
             </div>
         </ng-template>
 
+        <ng-template #currentTimeMarkerTemplate>
+        </ng-template>
+
         <div [ngSwitch]="view" class='demo-app-main' dir="rtl">
             <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [locale]="locale"
                 [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays"
@@ -128,22 +131,25 @@
                 [refresh]="refresh" (eventTimesChanged)="eventTimesChanged($event)">
             </mwl-calendar-month-view>
 
-            <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [locale]="locale"
+            <!-- <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [locale]="locale"
                 [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays" (eventClicked)="eventClicked($event)"
                 (beforeViewRender)="beforeWeekViewRender($event)" [refresh]="refresh"
                 (eventTimesChanged)="eventTimesChanged($event)" [excludeDays]="excludeDays"
                 [headerTemplate]="customHeaderTemplate">
-            </mwl-calendar-week-view>
+            </mwl-calendar-week-view> -->
 
             <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [locale]="locale"
                 (eventClicked)="eventClicked($event)" [excludeDays]="excludeDays"
-                (eventTimesChanged)="eventTimesChanged($event)">
+                (eventTimesChanged)="eventTimesChanged($event)" [dayStartHour]="8" [dayEndHour]="18"
+                [currentTimeMarkerTemplate]="currentTimeMarkerTemplate">
             </mwl-calendar-day-view>
-            <!-- <custom-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+
+            <custom-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
                 [locale]="locale" [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays"
                 (eventClicked)="eventClicked($event)" [excludeDays]="excludeDays"
-                [headerTemplate]="customHeaderTemplate" (eventTimesChanged)="eventTimesChanged($event)">
-            </custom-week-view> -->
+                [headerTemplate]="customHeaderTemplate" (eventTimesChanged)="eventTimesChanged($event)"
+                [dayStartHour]="8" [dayEndHour]="18" [currentTimeMarkerTemplate]="currentTimeMarkerTemplate">
+            </custom-week-view>
         </div>
     </div>
 </div>

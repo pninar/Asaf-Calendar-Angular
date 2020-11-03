@@ -27,7 +27,7 @@ import { HolidayService } from '../demo-utils/holiday/holiday.service';
 import { CalendarEventWithMeta, HolidayEvent } from '../demo-utils/calendar-event-with-meta.type';
 import { EventTypes } from '../demo-utils/event-types';
 import { Subject } from 'rxjs';
-import { isSameMinute } from 'date-fns';
+import { addHours, addMinutes, isSameMinute } from 'date-fns';
 import { startOfDay } from 'date-fns/fp';
 import { CalendarWeekViewHourSegmentComponent } from 'angular-calendar/modules/week/calendar-week-view-hour-segment.component';
 
@@ -160,10 +160,21 @@ export class DemoHebrewWithHolidayComponent implements OnInit {
             {
                 title: 'Event 1 - Warning',
                 color: colors.yellow,
-                start: startOfDay(new Date()),
+                start: addHours(startOfDay(new Date()), 8),
+                // end: addHours(startOfDay(new Date()), 9),
                 meta: {
                     id: -1,
                     type: EventTypes.Warning,
+                },
+            },
+            {
+                title: 'Event 1 - Info',
+                color: colors.yellow,
+                start: addMinutes(addHours(startOfDay(new Date()), 8), 15),
+                // end: addHours(startOfDay(new Date()), 9),
+                meta: {
+                    id: -1,
+                    type: EventTypes.Info,
                 },
             },
             {
