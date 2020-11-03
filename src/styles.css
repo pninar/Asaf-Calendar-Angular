@@ -10,27 +10,29 @@
 
  
 
-  .cal-week-view .cal-day-headers .cal-header{
+  /* .cal-week-view .cal-day-headers .cal-header{
     padding-left: 0px;
-  }
+  } */
 
-  .cal-week-view .cal-day-headers .cal-header:last-child {
+  /* .cal-week-view .cal-day-headers .cal-header:last-child {
     border-right: 1px solid;  
     border-color: #e1e1e1;
     padding-left: 0px;
-  }
+  } */
 
-  .cal-week-view .cal-day-headers .cal-header:not(first-child) {
+  /* .cal-week-view .cal-day-headers .cal-header:not(first-child) {
     border-left: 0px solid;      
-  }
+  } */
 
-  .cal-week-view .cal-day-headers .cal-header:first-child {
+  /* .cal-week-view .cal-day-headers .cal-header:first-child {
     border-left: 0px solid;  
    
-  }
-  .cal-week-view .day-label{
+  } */
+
+  /* .cal-week-view .day-label{
   font-weight: bold
-  }
+  } */
+
   /* .cal-week-view .cal-time {
     border-left: 1px solid;   
     border-color: red;
@@ -41,13 +43,7 @@
     border-color: #e1e1e1;
   } */
  
-  .cal-week-view .cal-day-headers {
-    /* -js-display: flex; */
-    display: flex;
-    
-    padding-left: 0px;
-    border: 1px solid;
-}
+  
     
 h2 {
     margin: 0;

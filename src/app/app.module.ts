@@ -1,14 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { DemoCalendarModule } from './demo/module';
-import { DemoCalendarWithHolidayModule } from './demo-with-holiday/module';
-import { DemoHebrewWithHolidayCalendarModule } from './demo-hebrew-with-holiday/module';
+import { DemoHebrewWithHolidayCalendarModule } from './demo/module';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { DemoUtilsModule } from './demo-utils/module';
 
 @NgModule({
   declarations: [
@@ -18,9 +18,9 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    HttpClientModule,
+    DemoUtilsModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
-    DemoCalendarModule,
-    DemoCalendarWithHolidayModule,
     DemoHebrewWithHolidayCalendarModule
   ],
   providers: [],

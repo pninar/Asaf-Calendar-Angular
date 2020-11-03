@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { DemoUtilsModule } from '../demo-utils/module';
-import { DemoCalendarComponent } from './component';
+import { DemoHebrewWithHolidayComponent } from './component';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 registerLocaleData(localHe);
@@ -18,7 +18,7 @@ registerLocaleData(localHe);
         }),
         DemoUtilsModule,
     ],
-    declarations: [DemoCalendarComponent],
-    exports: [DemoCalendarComponent],
+    declarations: [DemoHebrewWithHolidayComponent],
+    exports: [DemoHebrewWithHolidayComponent],
 })
-export class DemoCalendarModule { }
+export class DemoHebrewWithHolidayCalendarModule { }

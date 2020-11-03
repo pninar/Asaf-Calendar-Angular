@@ -1,0 +1,48 @@
+  .cal-month-view .bg-pink,
+  .cal-week-view .cal-day-columns .bg-pink,
+  .cal-day-view .bg-pink {
+    background-color: hotpink !important;
+  }
+
+    .cal-week-view .day-label, .cal-week-view .day-number, 
+    .cal-week-view .cal-day-headers .cal-time-label-column{
+  font-weight: bold;
+  }
+  
+    .cal-week-view .cal-day-headers .cal-time-label-column{
+  padding-top: 5px;
+  }
+
+  /* get rid of the double border on the left side */
+  .cal-week-view .cal-time-events {
+    border-left: 0px; 
+  }
+
+    .cal-week-view .cal-day-headers {
+      padding-left: 0px; 
+    }
+
+    .cal-week-view .cal-day-headers .cal-header:not(:first-child) {
+      border-right: 0px solid; }
+
+    /* if we want lines dividing the days of the week, include this overwrite */
+      /* .cal-week-view .cal-day-headers .cal-header:last-child {
+        border-right: 1px solid;  
+        border-color: #e1e1e1; 
+      } */
+
+      /* .cal-week-view .cal-day-column:last-child {
+          border-left: 0px solid;  
+          border-color: #e1e1e1;
+        } */
+
+      /* .cal-week-view .cal-day-headers .cal-header:first-child {
+        border-right: 0px solid;  
+      } */
+
+      /* .cal-week-view .cal-day-headers .cal-time-label-column{
+        
+        border: 0px solid; 
+      } */
+
+    
